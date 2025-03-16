@@ -82,9 +82,13 @@ def get_statistics_db():
     conn.close()
     return total_books, read_books
 
+
+
+
 # Streamlit par "Add Book" ka UI
 def add_book():
     st.subheader("📖 Add a New Book")
+    st.image("add.jpg", width=300)
     with st.form("add_book_form"):
         title = st.text_input("Enter the book title:")
         author = st.text_input("Enter the author:")
@@ -102,6 +106,7 @@ def add_book():
 # Streamlit par "Remove Book" ka UI
 def remove_book():
     st.subheader("🗑 Remove a Book")
+    st.image("delete.jpg", width=300)
     books = fetch_all_books_db()
     if books:
         # Har book ko ek descriptive label ke saath list karte hain
@@ -124,6 +129,7 @@ def remove_book():
 # Streamlit par "Search Book" ka UI
 def search_books():
     st.subheader("🔍 Search for a Book")
+    st.image("search.png", width=300)
     search_query = st.text_input("Search by title or author:")
     if search_query:
         results = search_books_db(search_query)
@@ -137,6 +143,7 @@ def search_books():
 # Streamlit par "Display All Books" ka UI
 def display_books():
     st.subheader("📚 Your Book Collection")
+    st.image("display.jpg", width=300)
     books = fetch_all_books_db()
     if not books:
         st.info("📭 Your library is empty. Add some books!")
@@ -147,6 +154,7 @@ def display_books():
 # Streamlit par "Display Statistics" ka UI
 def display_statistics():
     st.subheader("📊 Library Statistics")
+    st.image("statistics.png", width=300)
     total_books, read_books = get_statistics_db()
     unread_books = total_books - read_books
     read_percentage = (read_books / total_books * 100) if total_books > 0 else 0
@@ -160,6 +168,11 @@ def display_statistics():
 def main():
     st.title("📚 Personal Library Manager with Database")
     initialize_db()  # Database aur table create karo agar exist nahi karti
+    col1, col2 = st.columns(2)
+    with col1:
+        st.image("image1.jpg", width=200)
+    with col2:
+        st.image("image2.jpg", width=200)
 
     menu = [
         "📖 Add a Book", 
@@ -182,6 +195,8 @@ def main():
     elif choice == "📊 Display Statistics":
         display_statistics()
     elif choice == "🚪 Exit":
+        st.image("close.jpg", width=300)
+        st.balloons()
         st.success("📁 Library saved to database. Goodbye! 👋")
         st.stop()
 
